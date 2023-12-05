@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class GameDemo {
+public class GameDemoV1.1 {
     public static void main(String[] args) {
 
         //游戏开始菜单
