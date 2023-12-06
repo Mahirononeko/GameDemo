@@ -43,15 +43,19 @@ public class Ship {
         int hurt = r.nextInt(3) + 2;
         int damage = hurt - ship.getDefense();
         //定义剩余血量
-        int remainBlood = ship.getBlood() + ship.getDefense() - hurt;
+        int remainBlood = ship.getBlood() - damage;
         remainBlood = remainBlood < 0 ? 0 : remainBlood;
         ship.setBlood(remainBlood);
-        System.out.println(this.getName() + " attacks " + ship.getName());
-        System.out.println("causing " + damage + " damage, ");
-        System.out.println(ship.getName() + " remains " + remainBlood +" hp.");
+        System.out.println(this.getName() + " attacks " + ship.getName() + ", causing "
+                + damage + " damage. " + ship.getName() + " remains " + remainBlood + " hp.");
     }
     //定义修复方法
-    public void repair(Ship ship){
-        //定义修复
+    public void repair(){
+        Random r = new Random();
+            int repairblood = r.nextInt(5); // 可根据需要调整修复量
+            blood = blood + repairblood;
+            System.out.println(this.getName() + " repairs, restoring " + repairblood + " hp. "
+                    + this.getName() + " now has " + blood + " hp.");
+         //定义修复
     }
 }

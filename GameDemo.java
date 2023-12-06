@@ -8,6 +8,7 @@ public class GameDemo {
         System.out.println("Press 1 to start journey.");
         System.out.println("Press 2 to quit game.");
         Scanner sc1 = new Scanner(System.in);
+        //获取用户选择
         int choose1 = sc1.nextInt();
         switch (choose1){
             case 1 -> {
@@ -26,13 +27,19 @@ public class GameDemo {
                 //游戏开始
                 while(yourShip1.getBlood() > 0 && enemyShip1.getBlood() >0){
                     System.out.println("Press 1 to attack enemy ship.");
+                    System.out.println("Press 2 to repair your ship.");
                     Scanner sc2 = new Scanner(System.in);
+                    //获取用户选择
                     int choose2 = sc2.nextInt();
                     switch (choose2){
-                        case 1 -> {yourShip1.attack(enemyShip1);enemyShip1.attack(yourShip1);}
+                        //玩家攻击敌船并敌船反击
+                        case 1 -> {
+                            yourShip1.attack(enemyShip1);
+                            enemyShip1.attack(yourShip1);}
+                        case 2 -> yourShip1.repair();//修复玩家船
                     }
-                    if(yourShip1.getBlood() == 0 && enemyShip1.getBlood() == 0){
-                        System.out.println("You win!");
+                    if(yourShip1.getBlood() == 0 || enemyShip1.getBlood() == 0){
+                        System.out.println(yourShip1.getBlood() == 0 ? "You lose!" : "You win!");
                         break;
                     }
                 }
