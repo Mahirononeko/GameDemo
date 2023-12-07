@@ -37,7 +37,7 @@ public class GameDemo {
 
                 //选择飞船
                 for (int i = 0; i < 3; i++) {
-                    System.out.println(yourShips[i]);
+                    System.out.println((i+1) + "." +yourShips[i]);
                 }
                 int f = 0;
                 Scanner sc2 = new Scanner(System.in);
@@ -57,7 +57,7 @@ public class GameDemo {
                 //游戏进行中
                 while(yourShips[f].getBlood() > 0 && enemyShips[e].getBlood() >0){
                     System.out.println("Press 1 to attack enemy ship.");
-                    /*System.out.println("Press 2 to repair your ship.");*/
+                    System.out.println("Press 2 to repair your ship.");
                     Scanner sc3 = new Scanner(System.in);
                     int choose3 = sc3.nextInt();
                     switch (choose3){
@@ -65,15 +65,15 @@ public class GameDemo {
                             yourShips[f].attack(enemyShips[e]);
                             enemyShips[e].attack(yourShips[f]);
                         }
-                        /*case 2 -> {
+                        case 2 -> {
                             //判断是否需要修复
-                            /*if (yourShip1.getBlood() == 10){
+                            if (yourShip1.getBlood() == 10){
                                 System.out.println("Do not need repairing.");
                             }
                             else{
-                                yourShip1.repair(yourShip1);
+                                yourShip1.repair();
                             }
-                        }*/
+                        }
                         default -> System.out.println("No this option");
                     }
                     if(enemyShips[e].getBlood() == 0){
@@ -88,9 +88,15 @@ public class GameDemo {
             }
 
             //结束游戏
-            case 2 -> System.out.println("See you.");
+            case 2 -> {
+                System.out.println("See you.");
+                break;
+            }
             //其他情况
-            default -> System.out.println("No this option.");
+            default -> {
+                System.out.println("No this option.");
+                break;
+            }
         }
     }
 }

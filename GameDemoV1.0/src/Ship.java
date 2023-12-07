@@ -50,20 +50,17 @@ public class Ship {
         System.out.println(ship.getName() + " remains " + remainBlood + "hp.");
     }
     //定义修复方法
-    /*public void repair(Ship ship){
+    public void repair(){
         //定义修复
-        int repairing = 1;
-        int remainBlood = ship.getBlood() + repairing;
-        remainBlood = remainBlood > getBlood() ? getBlood() : remainBlood;
-        System.out.println("You repaired " + ship.getName() + ".");
-        System.out.println(ship.getName() + "no" +
-                "0w remains" + remainBlood + "hp.");
-    }*/
+            Random r = new Random();
+            int repairblood = r.nextInt(5); // 可根据需要调整修复量
+            blood = blood + repairblood;
+            System.out.println(this.getName() + " repairs, restoring " + repairblood + " hp. "
+                    + this.getName() + " now has " + blood + " hp.");
+    }
 
     //重写toString方法以打印对象值
     public String toString() {
-        return getName()
-                + "-" + getBlood() + "hp"
-                + " " + getDefense() + "defense";
+        return getName() + "-" + getBlood() + "hp" + getDefense() + "defense";
     }
 }
