@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -166,11 +167,12 @@ public class GameDemo {
         }
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Main programme
     public static void main(String[] args) {
         ArrayList<User> Users = new ArrayList<>();
         boolean shouldContinue = true;
+        //开始菜单
         while(shouldContinue){
             System.out.println("GameDemoV1.0");
             System.out.println("1: Sign up to join us.");
@@ -192,24 +194,51 @@ public class GameDemo {
             }
         }
 
-
-
         //生成飞船信息
-        //友方飞船信息
-        Ship yourShip1 = new Ship("Olympus",10,1,1);
-        Ship yourShip2 = new Ship("Artemis",10,1,1);
-        Ship yourShip3 = new Ship("Aurora",10,1,1);
-        Ship [] yourShips = {yourShip1,yourShip2,yourShip3};
-        //敌方飞船信息
-        Ship enemyShip1 = new Ship("Achilles",10,1,1);
-        Ship enemyShip2 = new Ship("Troy",10,1,1);
-        Ship enemyShip3 = new Ship("Ares",10,1,1);
-        Ship [] enemyShips = {enemyShip1,enemyShip2,enemyShip3};
+        //生成初始友方飞船信息
 
-        //储存飞船信息
-        ArrayList<Ship[]> Ships = new ArrayList<>();
-        Ships.add(yourShips);
-        Ships.add(enemyShips);
+        Ship yourShip1 = new Ship("Olympus",0,0,0);
+        Ship yourShip2 = new Ship("Artemis",0,0,0);
+        Ship yourShip3 = new Ship("Aurora",0,0,0);
+        Ship[] yourShips = {yourShip1, yourShip2, yourShip3};
+
+        //生成固定敌方飞船信息
+
+        Ship enemyShip1 = new Ship("Achilles",0,0,0);
+        Ship enemyShip2 = new Ship("Troy",0,0,0);
+        Ship enemyShip3 = new Ship("Ares",0,0,0);
+
+        Ship[] enemyShips = {enemyShip1, enemyShip2, enemyShip3};
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //生成反应炉信息
+        Reactor reactor1 = new Reactor("Nuclear reactor",40);
+        Reactor reactor2 = new Reactor("Annihilation reactor",50);
+        Reactor reactor3 = new Reactor("Zero point energy reactor",55);
+
+
+        Reactor[] reactors = {reactor1, reactor2, reactor3};
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //生成武器信息
+        Weapon weapon1 = new Weapon("Rail gun",20);
+        Weapon weapon2 = new Weapon("Laser gun",35);
+        Weapon weapon3 = new Weapon("Nuclear missile",40);
+        Weapon weapon4 = new Weapon("Annihilation bomb",50);
+
+        Weapon[] weapons = {weapon1, weapon2, weapon3, weapon4};
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //生成护盾信息
+        Shield shield1 = new Shield("Vibranium shield",7);
+        Shield shield2 = new Shield("Electric energy shield",10);
+        Shield shield3 = new Shield("Bioregenerative shield",15);
+
+
+        Shield[] shields = {shield1, shield2, shield3};
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         //游戏开始菜单
         System.out.println("Welcome!");
@@ -219,50 +248,145 @@ public class GameDemo {
         //开始游戏
         Scanner sc2 = new Scanner(System.in);
         int choose2 = sc2.nextInt();
-        loop1: switch (choose2){
+        loop1: switch (choose2) {
             case 1 -> {
-                System.out.println("Choose your ship:");
+                //创造飞船
+                System.out.println("Create your ship:");
+                //选择飞船
+                System.out.println("Choose your ship.");
+                //打印飞船的名字
+                System.out.println("1. " + yourShip1.getName());
+                System.out.println("2. " + yourShip2.getName());
+                System.out.println("3. " + yourShip3.getName());
+                Scanner sc = new Scanner(System.in);
+                int chooseShip = sc.nextInt();
+
 
                 //选择飞船
-                for (int i = 0; i < 3; i++) {
-                    System.out.println(yourShips[i]);
-                }
                 int f = 0;
-                Scanner sc3 = new Scanner(System.in);
-                int choose3 = sc3.nextInt();
-                switch (choose3){
-                    case 1 -> {}
+                switch (chooseShip) {
+                    case 1 -> {
+                    }
                     case 2 -> f = 1;
                     case 3 -> f = 2;
                 }
 
+                //给飞船添加装备
+                //打印反应炉信息
+                System.out.println("Choose a reactor for your ship (set blood value).");
+                System.out.println(Arrays.toString(reactors));
+                int chooseReactor = sc.nextInt();
+                int r = 0;
+                switch (chooseReactor) {
+                    //将飞船初始血量修改为反应炉提供的血量
+                    case 1 -> yourShips[f].setBlood(reactors[r].getProvideBlood());
+                    case 2 -> {
+                        r = 1;
+                        yourShips[f].setBlood(reactors[r].getProvideBlood());
+                    }
+                    case 3 -> {
+                        r = 2;
+                        yourShips[f].setBlood(reactors[r].getProvideBlood());
+                    }
+                    default -> System.out.println("Reactor does not exist.");
+                }
+                //打印武器信息
+                System.out.println("Choose a weapon for your ship (set attack power).");
+                System.out.println(Arrays.toString(weapons));
+                int chooseWeapon = sc.nextInt();
+                int w = 0;
+                switch (chooseWeapon) {
+                    //将飞船攻击力修改为武器提供的攻击力
+                    case 1 -> yourShips[f].setAttackPower(weapons[w].getWeaponAttackPower());
+                    case 2 -> {
+                        r = 1;
+                        yourShips[f].setAttackPower(weapons[w].getWeaponAttackPower());
+                    }
+                    case 3 -> {
+                        r = 2;
+                        yourShips[f].setAttackPower(weapons[w].getWeaponAttackPower());
+                    }
+                    case 4 -> {
+                        r = 3;
+                        yourShips[f].setAttackPower(weapons[w].getWeaponAttackPower());
+                    }
+                    default -> System.out.println("Weapon does not exist");
+                }
+                //打印护盾信息
+                System.out.println("Choose a shield for your ship (set defense power).");
+                System.out.println(Arrays.toString(shields));
+                int chooseShield = sc.nextInt();
+                int s = 0;
+                switch (chooseShield) {
+                    case 1 -> yourShips[f].setDefensePower(shields[s].getProvideDefense());
+                    case 2 -> {
+                        s = 1;
+                        yourShips[f].setDefensePower(shields[s].getProvideDefense());
+                    }
+                    case 3 -> {
+                        s = 2;
+                        yourShips[f].setDefensePower(shields[s].getProvideDefense());
+                    }
+                    default -> System.out.println("Shield does not exist.");
+                }
+                System.out.println("Now you have created your ship. Let's start the game.");
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////
                 //随机生成敌方飞船
                 Random n = new Random();
-                int e = n.nextInt(3);
-                System.out.println("Game starts.");
+                int en = n.nextInt(2);
+                //随机生成敌方反应炉
+                Random a = new Random();
+                int er = a.nextInt(3);
+                enemyShips[en].setBlood(reactors[er].getProvideBlood());
+                //随机生成敌方武器
+                Random b = new Random();
+                int ew = b.nextInt(2);
+                enemyShips[ew].setAttackPower(weapons[ew].getWeaponAttackPower());
+                //随机生成敌方护盾
+                Random c = new Random();
+                int es = c.nextInt(2);
+                enemyShips[es].setDefensePower(shields[es].getProvideDefense());
+
                 System.out.println("Enemy detected.");
-                System.out.println("Enemy ship info: " + enemyShips[e]);
+                System.out.println("Enemy ship info: " + enemyShips[en]
+                        + reactors[er] + weapons[ew] + shields[es]);
 
                 //游戏进行中
-                loop2: while(yourShips[f].getBlood() > 0 && enemyShips[e].getBlood() >0){
+                loop2:
+                while (yourShips[f].getBlood() > 0 && enemyShips[en].getBlood() > 0) {
                     System.out.println("Press 1 to attack enemy ship.");
+                    System.out.println("Press 2 to check ship's info.");
+                    System.out.println("Press 3 to check enemy's info.");
                     Scanner sc4 = new Scanner(System.in);
                     int choose4 = sc4.nextInt();
-                    switch (choose4){
+                    switch (choose4) {
                         case 1 -> {
-                            yourShips[f].attack(enemyShips[e]);
-                            enemyShips[e].attack(yourShips[f]);
+                            yourShips[f].attack(enemyShips[en]);
+                            enemyShips[en].attack(yourShips[f]);
                         }
-
+                        case 2 -> {
+                            System.out.println(yourShips[f].getName()
+                                    + " " + reactors[r].getReactorName()
+                                    + " " + weapons[w].getWeaponName()
+                                    + " " + shields[s].getShieldName());
+                        }
+                        case 3 -> {
+                            System.out.println(enemyShips[en].getName()
+                                    + " " + reactors[er].getReactorName()
+                                    + " " + weapons[ew].getWeaponName()
+                                    + " " + shields[es].getShieldName());
+                        }
                         default -> System.out.println("No this option");
                     }
-                    if (enemyShips[e].getBlood() == 0){
+
+
+                    if (enemyShips[en].getBlood() == 0) {
                         System.out.println("You win!");
                         System.out.println("Press 1 to return to menu.");
                         System.out.println("Press 2 to quit game.");
                         Scanner sc5 = new Scanner(System.in);
                         int choose5 = sc5.nextInt();
-                        switch (choose5){
+                        switch (choose5) {
                             case 1 -> {
                                 break loop1;
                             }
@@ -272,13 +396,13 @@ public class GameDemo {
                             }
                         }
                     }
-                    if (yourShips[f].getBlood() == 0){
+                    if (yourShips[f].getBlood() == 0) {
                         System.out.println("You lose!");
                         System.out.println("Press 1 to start again.");
                         System.out.println("Press 2 to quit game.");
                         Scanner sc6 = new Scanner(System.in);
                         int choose6 = sc6.nextInt();
-                        switch (choose6){
+                        switch (choose6) {
                             case 1 -> {
                                 break loop2;
                             }
@@ -287,14 +411,12 @@ public class GameDemo {
                     }
                 }
             }
-
             //结束游戏
             case 2 -> System.out.println("See you.");
             //其他情况
             default -> System.out.println("No this option.");
         }
     }
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Assisting methods
     //ensureIdOnly method

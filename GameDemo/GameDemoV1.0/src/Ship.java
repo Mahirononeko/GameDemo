@@ -1,5 +1,3 @@
-import java.util.Random;
-
 public class Ship {
     private String name; //set name var
     private int blood; //set blood var
@@ -13,7 +11,7 @@ public class Ship {
         this.attackPower = attackPower;
         this.defensePower = defensePower;
     }
-    //get and set method
+    //get and set methods
     public String getName(){
         return name;
     }
@@ -42,11 +40,9 @@ public class Ship {
     //attack method
     public void attack(Ship ship){
         //define hurt
-        Random h = new Random();
-        int hurt = h.nextInt(3) + 2;
-        int damage = hurt - ship.getDefensePower();
+        int damage = this.getAttackPower() - ship.getDefensePower();
         //define remain blood
-        int remainBlood = ship.getBlood() + ship.getDefensePower() - hurt;
+        int remainBlood = ship.getBlood() + ship.getDefensePower() - ship.getAttackPower();
         remainBlood = remainBlood < 0 ? 0 : remainBlood;
         ship.setBlood(remainBlood);
         System.out.println(this.getName() + " attacks " + ship.getName());
@@ -57,6 +53,7 @@ public class Ship {
     public String toString() {
         return getName()
                 + "-" + getBlood() + "hp"
+                + " " + getAttackPower() + "attack power"
                 + " " + getDefensePower() + "defense";
     }
 }
