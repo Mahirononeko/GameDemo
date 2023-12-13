@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
-//GameDemo Final
+//SpaceshipWars Official Version
 public class SpaceshipWars {
     //Management System
     //Sign up method
